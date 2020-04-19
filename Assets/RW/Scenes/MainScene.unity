@@ -488,7 +488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 1740111745}
   level: {fileID: 2060921409}
-  gameState: 1
+  gameState: 0
   sabers:
   - {fileID: 952352800}
   - {fileID: 1970630702}
@@ -928,7 +928,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0c236948c4b7746418a1e9aa1da2b424, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1527,7 +1527,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0c236948c4b7746418a1e9aa1da2b424, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
