@@ -50,7 +50,7 @@ public class Slicer : MonoBehaviour {
     }
 
     // Get a cutting plane from the rotation/position of the saber
-    private Plane GetPlane(GameObject go) {
+    private Plane GetPlane() {
         Vector3 pt1 = transform.rotation * new Vector3(0, 0, 0);
         Vector3 pt2 = transform.rotation * new Vector3(0, 1, 0);
         Vector3 pt3 = transform.rotation * new Vector3(0, 0, 1);
@@ -88,7 +88,7 @@ public class Slicer : MonoBehaviour {
         var half = Instantiate(go); // 与えられたGameObjectのコピーを作成
         var filter = half.GetComponent<MeshFilter>();
 
-        var cuttingPlane = GetPlane(go);
+        var cuttingPlane = GetPlane();
         filter.mesh = CloneMesh(cuttingPlane, filter.mesh, isLeft);
 
         half.transform.position = go.transform.position + transform.rotation * new Vector3(sign * 0.05f, 0, 0);
