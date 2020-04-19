@@ -33,12 +33,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class GrabItem : MonoBehaviour
-{
+public class GrabItem : MonoBehaviour {
     public XRNode handType;
 
-    void Update()
-    {
-        // FILL IN
+    void Update() {
+        bool gripDown = false;
+        InputDevice hand = InputDevices.GetDeviceAtXRNode(handType);
+        hand.TryGetFeatureValue(CommonUsages.gripButton, out gripDown);
+
+        if (!gripDown) {
+            return;
+        }
+
+        Collider[] overlaps = Physics.OverlapSphere(transform.position, 0.2f);
+
+        foreach (var c in overlaps) {
+            GameObject other = c.gameObject;
+            if (!other.GetComponent<Grabbable>()) {
+                continue;
+            }
+            if (other.gameObject.transform.parent == null) {
+                other.transform.SetParent(transform);
+            }
+        }
     }
 }
