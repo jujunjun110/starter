@@ -31,13 +31,15 @@
 using TMPro;
 using UnityEngine;
 
-public class TrapMisses : MonoBehaviour
-{
+public class TrapMisses : MonoBehaviour {
     public GameObject gameManager;
     public GameObject quickMessage;
 
-    void OnTriggerEnter(Collider other)
-    {
-        // FILL IN
+    void OnTriggerEnter(Collider other) {
+        var textMessage = Instantiate(quickMessage);
+        textMessage.transform.position = gameObject.transform.position;
+        textMessage.GetComponent<TextMeshPro>().text = "Missed!";
+
+        Destroy(other.gameObject);
     }
 }

@@ -32,8 +32,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuickMessage : MonoBehaviour
-{
+public class QuickMessage : MonoBehaviour {
     /// <summary>
     /// Speed of the GameObject.
     /// </summary>
@@ -44,14 +43,12 @@ public class QuickMessage : MonoBehaviour
     /// </summary>
     public float remainTime = 5;
 
-    void Start()
-    {
+    void Start() {
         // 1. Set message to disappear from scene after RemainTime.
         Destroy(gameObject, remainTime);
     }
 
-    void Update()
-    {
+    void Update() {
         // 2. Move the GameObject each update.
         transform.Translate(velocity * Time.deltaTime);
     }
