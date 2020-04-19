@@ -52,15 +52,26 @@ public class GameManager : MonoBehaviour {
     }
 
     public void Update() {
-        if (gameState == State.Menu && sabers[0].transform.parent && sabers[1].transform.parent) {
+        if (CanStartGame()) {
             ChangeState(State.Level);
         }
+
         if (misses > maxMisses) {
             if (score > highScore) {
                 highScore = score;
             }
             ChangeState(State.Menu);
         }
+    }
+
+    private bool CanStartGame() {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            return true;
+        }
+        if (gameState == State.Menu && sabers[0].transform.parent && sabers[1].transform.parent) {
+            return true;
+        }
+        return false;
     }
 
     public void ChangeState(State state) {

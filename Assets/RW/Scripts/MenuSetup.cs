@@ -46,6 +46,13 @@ public class MenuSetup : MonoBehaviour {
         rightStart = sabers[1].transform.position;
     }
 
+    public void OnEnable() {
+        SetSaberLocation(sabers[0], leftStart);
+        SetSaberLocation(sabers[1], rightStart);
+
+        SetScores();
+    }
+
     private void SetSaberLocation(GameObject saber, Vector3 position) {
         if (!saber) {
             return;
@@ -55,13 +62,6 @@ public class MenuSetup : MonoBehaviour {
         saber.transform.position = transform.position;
         saber.transform.localPosition = position;
         saber.transform.localRotation = Quaternion.identity;
-    }
-
-    public void OnEnable() {
-        SetSaberLocation(sabers[0], leftStart);
-        SetSaberLocation(sabers[1], rightStart);
-
-        SetScores();
     }
 
     public void SetScores() {
