@@ -39,15 +39,21 @@ public class GrabItem : MonoBehaviour {
     void Update() {
         bool gripDown = false;
         InputDevice hand = InputDevices.GetDeviceAtXRNode(handType);
+        if (hand == null) {
+            Debug.Log("hand not found");
+        }
         hand.TryGetFeatureValue(CommonUsages.gripButton, out gripDown);
 
         if (!gripDown) {
             return;
         }
 
+        Debug.Log("found grab event.");
+
         Collider[] overlaps = Physics.OverlapSphere(transform.position, 0.2f);
 
         foreach (var c in overlaps) {
+            Debug.Log("found overlapped items.");
             GameObject other = c.gameObject;
             if (!other.GetComponent<Grabbable>()) {
                 continue;
