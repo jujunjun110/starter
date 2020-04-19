@@ -32,8 +32,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VeggieBehaviour : MonoBehaviour
-{
+public class VeggieBehaviour : MonoBehaviour {
     public Vector3 movement;
     public Vector3 destination;
 
@@ -41,13 +40,26 @@ public class VeggieBehaviour : MonoBehaviour
 
     Rigidbody rb;
 
-    void Start()
-    {
+    void Start() {
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
-    {
-        // FILL IN
+    void Update() {
+        if (!rb.isKinematic) {
+            return;
+        }
+
+        dTime += Time.deltaTime;
+        if (dTime < 1.0f) {
+            var position = transform.position;
+            var z = position.z;
+            position.z = destination.z;
+
+            position = Vector3.Lerp(position, destination, dTime);
+            position.z = z;
+            transform.position = position;
+        }
+
+        transform.Translate(movement * Time.deltaTime);
     }
 }

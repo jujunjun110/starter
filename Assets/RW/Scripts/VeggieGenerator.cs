@@ -33,8 +33,7 @@ using UnityEngine;
 /// <summary>
 /// Generate Veggies based on instructions of a Song.
 /// </summary>
-public class VeggieGenerator : MonoBehaviour
-{
+public class VeggieGenerator : MonoBehaviour {
     // Prefab to be spawned.
     public GameObject[] veggies;
 
@@ -47,7 +46,7 @@ public class VeggieGenerator : MonoBehaviour
     // How often veggies appear.
     public float StartCutoff = 0.3f;
     private float cutoff;
-    
+
     // Have 4 unique starting positions for notes.
     private float[,] startPositions =
     {
@@ -60,18 +59,38 @@ public class VeggieGenerator : MonoBehaviour
     };
 
     // Reset the rate veggies appear at the start.
-    void OnEnable()
-    {
+    void OnEnable() {
         cutoff = StartCutoff;
     }
 
-    void Update()
-    {
-        // FILL IN
+    void Update() {
+        counter += Time.deltaTime;
+        float beatInterval = 60.0f / BPM;
+
+        if (counter < beatInterval) {
+            return;
+        }
+
+        counter = 0f;
+        if (Random.Range(0.0f, 1.0f) < cutoff) {
+            CreateVeggie();
+        }
+
+        cutoff += 0.01f;
     }
 
-    void CreateVeggie()
-    {
-        // FILL IN
+    void CreateVeggie() {
+        if (veggies.Length == 0) {
+            return;
+        }
+        int randomVeggie = Random.Range(0, veggies.Length - 1);
+        var veggie = Instantiate(veggies[randomVeggie]);
+        veggie.transform.position = transform.position;
+
+        int pos = Random.Range(0, 5);
+        var destination = transform.position + new Vector3(startPositions[pos, 0], startPositions[pos, 1], startPositions[pos, 2]);
+        var comp = (VeggieBehaviour)veggie.AddComponent(typeof(VeggieBehaviour));
+        comp.movement = new Vector3(0, 0, -6);
+        comp.destination = destination;
     }
 }
