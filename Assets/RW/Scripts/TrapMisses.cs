@@ -40,6 +40,10 @@ public class TrapMisses : MonoBehaviour {
         textMessage.transform.position = gameObject.transform.position;
         textMessage.GetComponent<TextMeshPro>().text = "Missed!";
 
+        if (gameManager) {
+            gameManager.GetComponent<GameManager>().misses += 1;
+        }
+
         Destroy(other.gameObject);
     }
 }

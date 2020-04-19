@@ -41,6 +41,10 @@ public class Slicer : MonoBehaviour {
             haptics.HapticEvent();
         }
 
+        if (gameManager) {
+            gameManager.GetComponent<GameManager>().score += 100;
+        }
+
         SplitMesh(other.gameObject);
         Destroy(other.gameObject);
     }
